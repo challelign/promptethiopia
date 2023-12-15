@@ -13,14 +13,14 @@ const handler = NextAuth({
 		strategy: "jwt",
 	},
 	providers: [
-		// GoogleProvider({
-		// 	clientId: process.env.GOOGLE_CLIENT_ID,
-		// 	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		// }),
-		// GitHubProvider({
-		// 	clientId: process.env.GITHUB_ID,
-		// 	clientSecret: process.env.GITHUB_SECRET,
-		// }),
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+		}),
+		GitHubProvider({
+			clientId: process.env.GITHUB_ID,
+			clientSecret: process.env.GITHUB_SECRET,
+		}),
 		CredentialsProvider({
 			async authorize(credentials, req) {
 				await connectToDB();
@@ -48,7 +48,7 @@ const handler = NextAuth({
 			},
 		}),
 	],
-	/* 
+
 	callbacks: {
 		async session({ session }) {
 			try {
@@ -89,16 +89,8 @@ const handler = NextAuth({
 
 		// secret: process.env.NEXTAUTH_SECRET,
 		// debug: process.env.NODE_ENV === "development",
-	}, */
-	// callbacks: {
-	// 	async session(session) {
-	// 		const sessionUser = await User.findOne({
-	// 			email: session.user.email,
-	// 		});
-	// 		session.user.id = sessionUser._id.toString();
-	// 		return session;
-	// 	},
-	// },
+	},
+
 	secret: process.env.NEXTAUTH_SECRET,
 });
 

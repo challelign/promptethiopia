@@ -1,0 +1,12 @@
+DEVELOPMENT="development"
+# GOOGLE_ID=806410067557-joevij15rhfjphgqj45gh6qfmsqjkia0.apps.googleusercontent.com
+# GOOGLE_CLIENT_SECRET=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
+# MONGODB_URI=mongodb://0.0.0.0:27017/share_prompt
+MONGODB_URI=mongodb+srv://challelign:Seyi8MxzvSh2ht6K@cluster0.soj9ki7.mongodb.net/?retryWrites=true&w=majority
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_URL_INTERNAL=http://localhost:3000
+NEXTAUTH_SECRET=476KPbdRUnQ/Y7XLKGLosEQslCEMTrPc2JKmPtfBpY8=
+GOOGLE_CLIENT_ID=806410067557-joevij15rhfjphgqj45gh6qfmsqjkia0.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+GITHUB_ID=1374dc79f86278d6a2ad
+GITHUB_SECRET=a6b4a564dbde86d872a23df898cd1b09229000ea
