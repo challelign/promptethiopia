@@ -38,7 +38,7 @@ const Nav = () => {
 			</Link>
 			{!session?.user ? (
 				<Link href="/login" className="black_btn">
-					Login
+					Login Custom
 				</Link>
 			) : (
 				""
@@ -72,7 +72,7 @@ const Nav = () => {
 						{providers &&
 							Object.values(providers).map((provider) => (
 								<>
-									<button
+									{/* <button
 										type="button"
 										key={provider.name}
 										onClick={() => {
@@ -80,9 +80,22 @@ const Nav = () => {
 										}}
 										className="black_btn"
 									>
-										{/* {provider.name} Sign In */}
+										{provider.name} Sign In
 										Sign In
-									</button>
+									</button> */}
+									{provider.name === "google" ? (
+										<button
+											type="button"
+											onClick={() => {
+												signIn("credentials");
+											}}
+											className="black_btn"
+										>
+											Login Google
+										</button>
+									) : (
+										""
+									)}
 									<button
 										type="button"
 										onClick={() => {
@@ -100,7 +113,7 @@ const Nav = () => {
 											}}
 											className="black_btn"
 										>
-											Login
+											Login Credentials
 										</button>
 									) : (
 										""
