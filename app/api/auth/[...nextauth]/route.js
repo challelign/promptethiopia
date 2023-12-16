@@ -21,7 +21,7 @@ const handler = NextAuth({
 			clientId: process.env.GITHUB_ID,
 			clientSecret: process.env.GITHUB_SECRET,
 		}),
-		CredentialsProvider({
+		/* CredentialsProvider({
 			async authorize(credentials, req) {
 				await connectToDB();
 
@@ -46,7 +46,7 @@ const handler = NextAuth({
 				const { _id, name, image } = user;
 				return { _id, name, email, image };
 			},
-		}),
+		}), */
 	],
 
 	callbacks: {
