@@ -8,7 +8,8 @@ import Profile from "@components/Profile";
 const MyProfile = () => {
 	const { data: session } = useSession();
 	const [posts, setPosts] = useState([]);
-	const id = "657be37e4ac4dc90b7a2e224";
+	// const id = "657be37e4ac4dc90b7a2e224";
+	const id = session?.user.id;
 	const router = useRouter();
 
 	// console.log(session?.user.email);
@@ -20,7 +21,7 @@ const MyProfile = () => {
 		};
 		console.log("posts ===>", posts);
 
-		if (session?.user.email) {
+		if (session?.user.id) {
 			fetchPost();
 		}
 	}, []);

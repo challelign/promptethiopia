@@ -13,15 +13,16 @@ const handler = NextAuth({
 		strategy: "jwt",
 	},
 	providers: [
-		GoogleProvider({
-			clientId: process.env.GOOGLE_CLIENT_ID,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		}),
-		GitHubProvider({
-			clientId: process.env.GITHUB_ID,
-			clientSecret: process.env.GITHUB_SECRET,
-		}),
-		/* CredentialsProvider({
+		// GoogleProvider({
+		// 	clientId: process.env.GOOGLE_CLIENT_ID,
+		// 	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+		// }),
+		// GitHubProvider({
+		// 	clientId: process.env.GITHUB_ID,
+		// 	clientSecret: process.env.GITHUB_SECRET,
+		// }),
+		CredentialsProvider({
+			name: "Credentials",
 			async authorize(credentials, req) {
 				await connectToDB();
 
@@ -30,7 +31,6 @@ const handler = NextAuth({
 				console.log(email, password);
 				const user = await User.findOne({ email });
 
-				console.log("user =>", { user });
 				if (!user) {
 					throw new Error("Invalid Email or Password");
 				}
@@ -40,15 +40,31 @@ const handler = NextAuth({
 				if (!isPasswordMatched) {
 					throw new Error("Invalid Email or Password");
 				}
+				// Include the user ID in the session
+				const sessionUser = {
+					id: user._id.toString(),
+					name: user.name,
+					email: user.email,
+					image: user.image,
+					isAdmin: true,
+				};
+				console.log("sessionUser =>", sessionUser);
 
 				// return user;
-				// Include the user ID in the returned data
-				const { _id, name, image } = user;
-				return { _id, name, email, image };
+				// Return the user object with _id included
+				return sessionUser;
 			},
-		}), */
+		}),
 	],
 
+	// callbacks: {
+	// 	session: async ({ session, token, sessionUser }) => {
+	// 		if (sessionUser.sessionUser) {
+	// 			session.user._id = token._id;
+	// 		}
+	// 		return session;
+	// 	},
+	// },
 	callbacks: {
 		async session({ session }) {
 			try {
@@ -65,33 +81,33 @@ const handler = NextAuth({
 
 			return session;
 		},
-		async signIn({ account, profile, user, credentials }) {
-			try {
-				await connectToDB();
+		// async signIn({ account, profile, user, credentials }) {
+		// 	try {
+		// 		await connectToDB();
 
-				const existingUser = await User.findOne({ email: profile.email });
+		// 		const existingUser = await User.findOne({ email: profile.email });
 
-				if (!existingUser) {
-					await User.create({
-						email: profile.email,
-						username: profile.name.replace(" ", "").toLowerCase(),
-						image: profile.picture,
-					});
-				}
-			} catch (error) {
-				console.error("Error during sign-in:", error);
-				// Handle the error appropriately, such as logging or displaying an error message.
-				return false; // Indicate sign-in failure
-			}
+		// 		if (!existingUser) {
+		// 			await User.create({
+		// 				email: profile.email,
+		// 				username: profile.name.replace(" ", "").toLowerCase(),
+		// 				image: profile.picture,
+		// 			});
+		// 		}
+		// 	} catch (error) {
+		// 		console.error("Error during sign-in:", error);
+		// 		// Handle the error appropriately, such as logging or displaying an error message.
+		// 		return false; // Indicate sign-in failure
+		// 	}
 
-			return true; // Indicate sign-in success
-		},
+		// 	return true; // Indicate sign-in success
+		// },
 
 		// secret: process.env.NEXTAUTH_SECRET,
 		// debug: process.env.NODE_ENV === "development",
 	},
 
-	secret: process.env.NEXTAUTH_SECRET,
+	// secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

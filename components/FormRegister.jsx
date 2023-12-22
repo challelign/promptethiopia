@@ -84,14 +84,6 @@ const FormRegister = ({ type, post, setPost, submitting, handleSubmit }) => {
 								>
 									Password
 								</label>
-								<div className="text-sm">
-									<a
-										href="#"
-										className="font-semibold text-indigo-600 hover:text-indigo-500"
-									>
-										Forgot password?
-									</a>
-								</div>
 							</div>
 							<div className="mt-2">
 								<input
@@ -108,29 +100,22 @@ const FormRegister = ({ type, post, setPost, submitting, handleSubmit }) => {
 							</div>
 						</div>
 
-						<div>
-							<Link href="/" className="text-gray-500 text-sm">
+						<div className="flex   gap-5   justify-evenly w-full">
+							<Link
+								href="/"
+								className="flex  justify-center rounded-md bg-slate-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+							>
 								Cancel
 							</Link>
 							<button
 								type="submit"
 								disabled={submitting}
-								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+								className="flex  justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 							>
 								{submitting ? `${type}ing...` : type}
 							</button>
 						</div>
 					</form>
-
-					<p className="mt-10 text-center text-sm text-gray-500">
-						Not a member?{" "}
-						<a
-							href="#"
-							className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-						>
-							Start a 14 day free trial
-						</a>
-					</p>
 				</div>
 			</div>
 		</div>

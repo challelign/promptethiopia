@@ -1,7 +1,13 @@
 import { Schema, model, models } from "mongoose";
 import bcryptjs from "bcryptjs";
+const { v4: uuidv4 } = require("uuid");
 
 const UserSchema = new Schema({
+	// id: {
+	// 	type: String,
+	// 	default: uuidv4,
+	// 	unique: true,
+	// },
 	name: {
 		type: String,
 	},

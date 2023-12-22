@@ -8,12 +8,20 @@ import { usePathname, useRouter } from "next/navigation";
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 	const { data: session } = useSession();
 	const pathName = usePathname();
+	const router = useRouter();
 	const [copied, setCopied] = useState("");
 
 	const handleCopy = () => {
 		setCopied(post.prompt);
 		navigator.clipboard.writeText(post.prompt);
 		setTimeout(() => setCopied(""), 3000);
+	};
+	const handleProfileClick = () => {
+		console.log(post);
+
+		if (post.creator._id === session?.user.id) return router.push("/profile");
+
+		router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
 	};
 	return (
 		<div className="prompt_card">
@@ -26,6 +34,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 						width={40}
 						height={40}
 						className="rounded-full object-contain"
+						onClick={handleProfileClick}
 					/>
 
 					<div className="flex flex-col">
@@ -58,24 +67,23 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 			</p>
 			{/* 657be37e4ac4dc90b7a2e224 */}
 			{/* {session?.user.email === post.creator.email && */}
-			{session?.user.email === post?.creator.email &&
-				pathName === "/profile" && (
-					<div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-						<p
-							className="font-inter text-sm green_gradient cursor-pointer"
-							onClick={handleEdit}
-						>
-							Edit
-						</p>
+			{session?.user.id === post.creator._id && pathName === "/profile" && (
+				<div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+					<p
+						className="font-inter text-sm green_gradient cursor-pointer"
+						onClick={handleEdit}
+					>
+						Edit
+					</p>
 
-						<p
-							className="font-inter text-sm orange_gradient cursor-pointer"
-							onClick={handleDelete}
-						>
-							Delete
-						</p>
-					</div>
-				)}
+					<p
+						className="font-inter text-sm orange_gradient cursor-pointer"
+						onClick={handleDelete}
+					>
+						Delete
+					</p>
+				</div>
+			)}
 		</div>
 	);
 };

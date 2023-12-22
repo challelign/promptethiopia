@@ -3,6 +3,7 @@ import "@styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
 	title: "PrompEthiopia",
@@ -20,6 +21,7 @@ const RootLayout = ({ children }) => (
 				<main className="app">
 					{/* <SessionProvider> */}
 					<Nav />
+					<Toaster position="top-center" />
 					{children}
 					{/* </SessionProvider> */}
 				</main>
