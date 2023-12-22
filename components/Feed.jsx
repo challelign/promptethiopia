@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import PromptCard from "@components/PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
-	// console.log("data =>>>>>>>>>", data);
+	console.log("data =>>>>>>>>>", data);
 	return (
 		<div className="mt-5 prompt_layout">
-			{data.map((item) => (
+			{data?.map((item) => (
 				<PromptCard
 					key={item._id}
 					post={item}
@@ -82,7 +82,7 @@ const Feed = () => {
 						Filter By Tag
 					</p>
 					<ul class="flex   -mb-px w-full">
-						{posts.map((tag) => (
+						{posts?.map((tag) => (
 							<li className="me-2 font-inter text-sm blue_gradient cursor-pointer">
 								<a
 									onClick={() => handleTagClick && handleTagClick(tag.tag)}
