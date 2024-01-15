@@ -53,6 +53,10 @@ const Feed = () => {
 		const searchResult = filterPrompts(tagName);
 		setSearchedResults(searchResult);
 	};
+	const clearTags = () => {
+		console.log("clear");
+		setSearchText("");
+	};
 	useEffect(() => {
 		const fetchPost = async () => {
 			const response = await fetch("/api/prompt");
@@ -65,23 +69,33 @@ const Feed = () => {
 
 	return (
 		<section className="feed">
-			<form className="relative w-full flex-center">
-				<input
-					type="text"
-					placeholder="Search for a tag or a username or email"
-					value={searchText}
-					onChange={handleSearchChange}
-					required
-					className="search_input peer"
-				/>
-			</form>
+			<div className="row flex gap-x-3">
+				<form className="  flex relative w-full flex-center ">
+					<input
+						type="text"
+						placeholder="Search for a tag or a username or email"
+						value={searchText}
+						onChange={handleSearchChange}
+						required
+						className="search_input peer w-full"
+					/>
+				</form>
+				<button
+					onClick={clearTags}
+					disabled={searchText == ""}
+					className=" flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500   "
+				>
+					clear
+				</button>
+			</div>
 
 			<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-				<div className="flex-center gap-5">
-					<p className="prompt_layout font-satoshi font-semibold text-gray-900">
-						Filter By Tag
-					</p>
-					<ul class="flex   -mb-px w-full">
+				<div className="row flex ">
+					<h6 className="w-full prompt_layout font-satoshi font-semibold text-gray-900">
+						filter-tag
+					</h6>
+
+					<ul class="flex -mb-px w-full">
 						{posts?.map((tag) => (
 							<li className="me-2 font-inter text-sm blue_gradient cursor-pointer">
 								<a

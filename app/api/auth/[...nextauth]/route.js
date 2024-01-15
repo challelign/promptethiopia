@@ -29,8 +29,10 @@ const handler = NextAuth({
 				const { email, password } = credentials;
 
 				console.log(email, password);
-				const user = await User.findOne({ email });
+				// const user = await User.findOne({ email }, { timeout: 20000 });
+				const user = await User.findOne({ email }).timeout(20000); // Set timeout to 20 seconds (20000 milliseconds)
 
+				console.log("user ==>", user);
 				if (!user) {
 					throw new Error("Invalid Email or Password");
 				}
