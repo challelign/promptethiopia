@@ -33,16 +33,19 @@ const Nav = () => {
 				/>
 				<p className="logo_text">PrompEthiopia</p>
 			</Link>
-			<Link href="/register" className="black_btn">
-				Register User
-			</Link>
-			{!session?.user ? (
-				<Link href="/login" className="black_btn">
-					Login Custom
+
+			<div className="w-full  flex row flex-end gap-x-2">
+				<Link href="/register" className="black_btn_login ">
+					Register User
 				</Link>
-			) : (
-				""
-			)}
+				{!session?.user ? (
+					<Link href="/login" className="black_btn_login ">
+						Login Custom
+					</Link>
+				) : (
+					""
+				)}
+			</div>
 
 			{/* Desktop Navigation */}
 			<div className="sm:flex hidden">
@@ -69,10 +72,10 @@ const Nav = () => {
 					</div>
 				) : (
 					<>
-						{providers &&
-							Object.values(providers).map((provider) => (
-								<>
-									{/* <button
+						{/* {providers &&
+							Object.values(providers).map((provider) => ( */}
+						<>
+							{/* <button
 										type="button"
 										key={provider.name}
 										onClick={() => {
@@ -83,6 +86,8 @@ const Nav = () => {
 										{provider.name} Sign In
 										Sign In
 									</button> */}
+
+							{/* 
 									{provider.name === "google" ? (
 										<button
 											type="button"
@@ -118,8 +123,10 @@ const Nav = () => {
 									) : (
 										""
 									)}
-								</>
-							))}
+
+									 */}
+						</>
+						{/* ))} */}
 					</>
 				)}
 			</div>
